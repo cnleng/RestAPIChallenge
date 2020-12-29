@@ -12,10 +12,16 @@ public class User {
     private Long id;
     private String name;
     private String email;
-    @OneToMany(cascade = CascadeType.ALL, targetEntity=Booking.class)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity=Booking.class)
+    @JoinColumn(name = "user_id")
     private List<Booking> bookings = new ArrayList<>();
 
     public User() {
+    }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
     }
 
     public User(Long id, String name, String email) {

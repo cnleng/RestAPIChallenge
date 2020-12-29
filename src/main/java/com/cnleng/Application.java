@@ -1,6 +1,5 @@
 package com.cnleng;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -11,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+//@EnableTransactionManagement
 @ComponentScan(basePackages = { "com.cnleng.*" })
 public class Application {
 
@@ -23,13 +23,8 @@ public class Application {
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
-            LOG.info("REST application Started ...");
+            LOG.info("Booking application Started ...");
         };
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 
 }
