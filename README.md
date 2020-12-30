@@ -1,5 +1,12 @@
 # REST API Challlenge
 
+## Pre-Requisite
+
+Java 8 or 11.
+
+Maven 3.6.3
+
+We use h2 in-memory database to eliminate the need for istalling and configuring an actual database.
 ## REST API Endpoints
 
 ### Booking endpoints

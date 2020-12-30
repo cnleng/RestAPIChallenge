@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Booking {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")

@@ -1,9 +1,11 @@
 package com.cnleng.api.response;
 
-public abstract class ApiResponse {
+import java.io.Serializable;
+
+public abstract class ApiResponse implements Serializable {
 
     protected String message;
-    protected Exception error;
+    protected String error;
 
     public ApiResponse() {
     }
@@ -12,7 +14,7 @@ public abstract class ApiResponse {
         this.message = message;
     }
 
-    public ApiResponse(String message, Exception error) {
+    public ApiResponse(String message, String error) {
         this(message);
         this.error = error;
     }
@@ -25,11 +27,11 @@ public abstract class ApiResponse {
         this.message = message;
     }
 
-    public Exception getError() {
+    public String getError() {
         return error;
     }
 
-    public void setError(Exception error) {
+    public void setError(String error) {
         this.error = error;
     }
 }

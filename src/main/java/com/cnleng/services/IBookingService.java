@@ -22,7 +22,7 @@ public interface IBookingService {
 
     void deleteBooking(Long id);
 
-    List<Booking> getBookingByUserId(Long userId) throws UserNotFoundException;
+    List<Booking> getBookingByUserId(Long userId);
 
     List<Booking> getAvailabilities(DateTime checkIn, DateTime checkOut) throws InvalidDateRangeException;
 }

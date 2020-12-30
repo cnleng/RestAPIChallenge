@@ -7,11 +7,15 @@ public class BookingListResponse extends ApiResponse {
 
     private List<BookingResponse> bookingResponses = new ArrayList<>();
 
+    public BookingListResponse() {
+        super();
+    }
+
     public BookingListResponse(String message) {
         super(message);
     }
 
-    public BookingListResponse(String message, Exception error) {
+    public BookingListResponse(String message, String error) {
         super(message, error);
     }
 

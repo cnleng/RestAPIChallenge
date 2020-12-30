@@ -42,7 +42,8 @@ public class UserController {
             return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             LOGGER.error("An error occurred while creating user", e);
-            UserResponse userResponse = new UserResponse("An error occurred while creating user", e);
+            UserResponse userResponse = new UserResponse("An error occurred while creating user",
+                    e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(userResponse);
         }
     }
@@ -54,7 +55,7 @@ public class UserController {
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             LOGGER.error("An error occurred while deleting user", e);
-            UserResponse response = new UserResponse("An error occurred while deleting user", e);
+            UserResponse response = new UserResponse("An error occurred while deleting user", e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
         }
     }
@@ -78,7 +79,8 @@ public class UserController {
             }
         } catch (Exception e) {
             LOGGER.error("An error occurred while getting user's reservations", e);
-            BookingListResponse response = new BookingListResponse("An error occurred while getting user's reservations", e);
+            BookingListResponse response = new BookingListResponse("An error occurred while getting user's reservations",
+                    e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }

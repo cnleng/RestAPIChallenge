@@ -23,6 +23,7 @@ public class BookingService implements IBookingService {
 
     private final static int RESERVATION_MAX_DAYS = 3;
     private final static int ONE_MONTH = 1;
+    private static final int ONE_DAY = 1;
 
     @Autowired
     private IUserDAO userDAO;
@@ -106,7 +107,7 @@ public class BookingService implements IBookingService {
         DateTime maxDefaultCheckIn = DateUtils.getMonthAhead(DateTime.now(), ONE_MONTH);
         LOG.error(checkIn.toString());
         LOG.error(defaultCheckIn.toString());
-        if ( (DateUtils.getDifferenceInDays(checkIn, defaultCheckIn)<1 && checkIn.isBefore(defaultCheckIn))
+        if ( (DateUtils.getDifferenceInDays(checkIn, defaultCheckIn)<ONE_DAY && checkIn.isBefore(defaultCheckIn))
                 || checkIn.isAfter(maxDefaultCheckIn)) {
             throw new BookingMaxDaysException("The campsite can be reserved minimum 1 day(s) ahead of arrival and up to 1 month in advance.");
         }
@@ -120,14 +121,8 @@ public class BookingService implements IBookingService {
 
     @Override
     @Transactional
-    public List<Booking> getBookingByUserId(Long userId) throws UserNotFoundException {
-        User user;
-        try {
-            user = userDAO.findById(userId).get();
-        } catch (Exception e) {
-            throw new UserNotFoundException("Cannot find Reservation for user Id = "+ userId);
-        }
-        return user.getBookings();
+    public List<Booking> getBookingByUserId(Long userId) {
+        return bookingDAO.findBookingByUserId(userId);
     }
 
     @Override

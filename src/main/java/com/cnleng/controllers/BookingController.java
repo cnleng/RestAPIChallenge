@@ -38,10 +38,10 @@ public class BookingController {
             BookingResponse response = new BookingResponse("Reservation found.", booking.getId(),
                     DateUtils.convertFromDateTime(booking.getCheckIn()),
                     DateUtils.convertFromDateTime(booking.getCheckOut()));
-            return ResponseEntity.status(HttpStatus.FOUND).body(response);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             LOGGER.error("An error occurred while getting reservation", e);
-            BookingResponse response = new BookingResponse("Cannot find reservation", e);
+            BookingResponse response = new BookingResponse("Cannot find reservation",  e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
@@ -66,14 +66,14 @@ public class BookingController {
                                 DateUtils.convertFromDateTime(b.getCheckOut())))
                         .collect(Collectors.toList());
                 response = new BookingListResponse("Successfully found reservations for date range.", responses);
-                return ResponseEntity.status(HttpStatus.OK).body(response);
+                return ResponseEntity.ok(response);
             } else {
                 response = new BookingListResponse("No reservations found.");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
             }
         } catch (Exception e) {
             LOGGER.error("An error occurred while getting reservations", e);
-            BookingListResponse response = new BookingListResponse("An error occurred while getting reservations", e);
+            BookingListResponse response = new BookingListResponse("An error occurred while getting reservations", e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
@@ -86,7 +86,7 @@ public class BookingController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             LOGGER.error("An error occurred while booking reservation", e);
-            BookingResponse userResponse = new BookingResponse("An error occurred while booking reservation", e);
+            BookingResponse userResponse = new BookingResponse("Cannot create reservation", e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(userResponse);
         }
     }
@@ -96,11 +96,11 @@ public class BookingController {
         bookingRequest.setId(id);
         try {
             Long bookingId = bookingService.updateBooking(bookingRequest);
-            BookingResponse response = new BookingResponse("Reservation successfully created", bookingId, null, null);
+            BookingResponse response = new BookingResponse("Reservation successfully updated", bookingId, null, null);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             LOGGER.error("An error occurred while updating reservation", e);
-            BookingResponse userResponse = new BookingResponse("An error occurred while updating reservation", e);
+            BookingResponse userResponse = new BookingResponse("Cannot update reservation", e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(userResponse);
         }
     }
@@ -113,7 +113,7 @@ public class BookingController {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
         } catch (Exception e) {
             LOGGER.error("An error occurred while while cancelling reservation", e);
-            BookingResponse response = new BookingResponse("An error occurred while cancelling reservation", e);
+            BookingResponse response = new BookingResponse("Cannot cancel reservation", e.getClass().getTypeName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }

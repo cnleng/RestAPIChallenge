@@ -10,7 +10,7 @@ public class UserResponse extends ApiResponse {
         super();
     }
 
-    public UserResponse(String message, Exception error) {
+    public UserResponse(String message, String error) {
         super(message, error);
     }
 

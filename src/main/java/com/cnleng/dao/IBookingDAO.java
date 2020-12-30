@@ -12,6 +12,9 @@ import java.util.List;
 @Repository
 public interface IBookingDAO extends CrudRepository<Booking, Long> {
 
-    @Query(value = "SELECT b FROM Booking b where b.checkIn > :checkIn and b.checkOut < :checkOut")
+    @Query(value = "SELECT b FROM Booking b where (b.checkIn >= :checkIn and b.checkIn <= :checkOut) or (b.checkOut >= :checkIn and b.checkOut <= :checkOut)")
     List<Booking> findAvailabilities(@Param("checkIn") DateTime checkIn, @Param("checkOut") DateTime checkOut);
+
+    @Query(value = "SELECT b FROM Booking b where b.user.id = :userId")
+    List<Booking> findBookingByUserId(@Param("userId") Long userId);
 }

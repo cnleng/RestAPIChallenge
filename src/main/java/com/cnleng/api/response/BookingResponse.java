@@ -5,11 +5,15 @@ public class BookingResponse extends ApiResponse {
     private String checkIn;
     private String checkOut;
 
+    public BookingResponse() {
+        super();
+    }
+
     public BookingResponse(String message) {
         super(message);
     }
 
-    public BookingResponse(String message, Exception error) {
+    public BookingResponse(String message, String error) {
         super(message, error);
     }
 
