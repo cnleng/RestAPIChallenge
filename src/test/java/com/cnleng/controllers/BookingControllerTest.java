@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BookingControllerTest {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private final static String checkIn = "2021-01-08";
-    private final static String checkOut = "2021-01-10";
+    private final static String checkIn = "2021-01-28";
+    private final static String checkOut = "2021-01-30";
 
     @LocalServerPort
     private int port;
